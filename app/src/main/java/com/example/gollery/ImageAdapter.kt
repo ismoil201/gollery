@@ -11,7 +11,8 @@ import com.example.gollery.databinding.ItemImageBinding
 import com.example.gollery.databinding.ItemImageMoreBinding
 
 class ImageAdapter(
-    private val itemClickListener: ItemClickListener) : ListAdapter<ImageItems, RecyclerView.ViewHolder>(
+    private val itemClickListener: ItemClickListener
+) : ListAdapter<ImageItems, RecyclerView.ViewHolder>(
     object : DiffUtil.ItemCallback<ImageItems>() {
         override fun areItemsTheSame(oldItem: ImageItems, newItem: ImageItems): Boolean {
             return oldItem === newItem
