@@ -17,5 +17,7 @@ class FrameActivity : AppCompatActivity() {
 
 
 
+        val images  = intent.getStringArrayListExtra("images")
+
     }
 }
