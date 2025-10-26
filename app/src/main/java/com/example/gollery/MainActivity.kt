@@ -2,6 +2,7 @@ package com.example.gollery
 
 import android.Manifest
 import android.app.AlertDialog
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -35,8 +36,21 @@ class MainActivity : AppCompatActivity() {
         binding.btnLoadImage.setOnClickListener {
             checkPermission()
         }
+
+        binding.navigateFrameActivityButtom.setOnClickListener {
+
+            navigateToFrameActivity()
+        }
     }
 
+
+    private fun navigateToFrameActivity() {
+        val images = imageAdapter.currentList.filterIsInstance<ImageItems.Image>().map { it.uri.toString() }.toTypedArray()
+        val intent = Intent(this, FrameActivity::class.java)
+            .putExtra("uriList", images)
+
+        startActivity(intent)
+    }
     private fun checkPermission() {
         val permission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             Manifest.permission.READ_MEDIA_IMAGES

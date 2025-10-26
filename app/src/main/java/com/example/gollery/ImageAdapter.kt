@@ -61,6 +61,7 @@ class ImageAdapter(
     }
 
     interface ItemClickListener {
+
         fun onItemClick()
     }
 
