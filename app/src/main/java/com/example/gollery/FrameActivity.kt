@@ -1,8 +1,10 @@
 package com.example.gollery
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.gollery.databinding.ActivityFrameBinding
@@ -17,7 +19,12 @@ class FrameActivity : AppCompatActivity() {
 
 
 
-        val images  = intent.getStringArrayListExtra("images")
+        val images  = (intent.getStringArrayExtra("uriList")?: emptyArray()).map {
+            uriString -> FrameItem(uriString.toUri())
+        }
+
+        binding.viewPager2.adapter = FrameAdapter(images)
+        binding.viewPager2.setCurrentItem(intent.getIntExtra("position",0),false)
 
     }
 }
