@@ -2,6 +2,7 @@ package com.example.gollery
 
 import android.net.Uri
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
@@ -19,6 +20,14 @@ class FrameActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
+        binding.toolBar.apply {
+            title = "Gallery full size test"
+            setSupportActionBar(this)
+
+        }
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
 
         val images  = (intent.getStringArrayExtra("uriList")?: emptyArray()).map {
             uriString -> FrameItem(uriString.toUri())
@@ -33,5 +42,18 @@ class FrameActivity : AppCompatActivity() {
                binding.viewPager2.currentItem =  tab.position
 
         }.attach()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+       return when(item.itemId){
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
     }
 }
